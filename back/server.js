@@ -1,22 +1,19 @@
-// server.js
-import 'dotenv/config'; // Pour charger les variables d'environnement
-import express from 'express';
-import cors from 'cors';
-import router from './api/routes.js';
+import express from "express";
+import router from "./api/routes.js"; // Assurez-vous d'importer correctement le fichier de routes
+import cors from "cors";
 
 const app = express();
-const PORT = 5000;
-
-// Configuration CORS
 app.use(cors());
 
-// Utiliser les routes API
-app.use(router);
+// Middleware pour parser le JSON
+app.use(express.json());
 
-// Servir les fichiers statiques
-app.use(express.static('public'));
+// Routes
+app.use("/api", router);
 
-// Démarrer le serveur
+app.use(express.static("public"));
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Serveur API lancé sur http://localhost:${PORT}`);
 });

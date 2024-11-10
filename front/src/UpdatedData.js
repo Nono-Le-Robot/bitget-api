@@ -21,27 +21,35 @@ function UpdatedData() {
       setSizeTrade(data.sizeTrade);
       setTotalUSDTFutures(data.totalUSDTFutures);
       setTrades(data.trades);
-      setAllCoins(data.allCoins)
-      
+      setAllCoins(data.allCoins);
     } catch (error) {
       console.error("Erreur lors de la récupération des données :", error);
     }
   };
 
   useEffect(() => {
-    // const intervalId = setInterval(fetchData, 1000);
-    // return () => clearInterval(intervalId);
-    fetchData()
+    const intervalId = setInterval(fetchData, 1000);
+    return () => clearInterval(intervalId);
+    fetchData();
   }, []);
 
   useEffect(() => {
-    
-    console.log(allCoins)
+    console.log(allCoins);
   }, [allCoins]);
   return (
     <>
-    <InterfacePositions availableUSDTFuturesState={availableUSDTFuturesState} PLTotalState={PLTotalState} sizeTradeState={sizeTradeState} totalUSDTFuturesState={totalUSDTFuturesState} trades={trades} />
-    <InterfaceTrading totalUSDTFuturesState={totalUSDTFuturesState} allCoins={allCoins} sizeUSDT={sizeTradeState}/>
+      <InterfacePositions
+        availableUSDTFuturesState={availableUSDTFuturesState}
+        PLTotalState={PLTotalState}
+        sizeTradeState={sizeTradeState}
+        totalUSDTFuturesState={totalUSDTFuturesState}
+        trades={trades}
+      />
+      <InterfaceTrading
+        totalUSDTFuturesState={totalUSDTFuturesState}
+        allCoins={allCoins}
+        sizeUSDT={sizeTradeState}
+      />
     </>
   );
 }
